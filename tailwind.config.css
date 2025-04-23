@@ -1,0 +1,10 @@
+@config '../../tailwind.config.js';
+
+@layer base {
+  :root {
+    --color-primary-green: #2F7230;
+    --color-gold: #D4AF37;
+    --color-ivory: #F9F7F2;
+    --color-teal: #40C0C7;
+  }
+}
