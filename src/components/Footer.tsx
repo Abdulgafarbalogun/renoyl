@@ -85,12 +85,12 @@ const Footer = () => {
           {/* JOIN OUR COMMUNITY Column */}
           <div className="col-span-1 lg:col-span-1">
             <h3 className="text-white uppercase font-medium tracking-wide mb-4">Join our community</h3>
-            <form onSubmit={handleSubmit} className="mt-2">
+            <form className="mt-2">
               <div className="flex flex-col space-y-2">
                 <input
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  // value={email}
+                  // onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email address"
                   className="px-4 py-2 rounded-md text-gray-800 w-full"
                   required
