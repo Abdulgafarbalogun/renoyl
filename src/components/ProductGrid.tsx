@@ -1,6 +1,24 @@
+// components/ProductGrid.tsx
 import ProductCard from './ProductCard';
 
-const ProductGrid = ({ products, title, subtitle }) => {
+// Define the Product interface (the same as in ProductCard.tsx)
+interface Product {
+  id: number;
+  title: string;
+  subtitle?: string;
+  price: number;
+  imageUrl: string;
+  slug: string;
+}
+
+// Define the props interface for the component
+interface ProductGridProps {
+  products: Product[];
+  title: string;
+  subtitle?: string;
+}
+
+const ProductGrid = ({ products, title, subtitle }: ProductGridProps) => {
   return (
     <section className="py-16">
       <div className="container mx-auto px-4">
@@ -14,11 +32,17 @@ const ProductGrid = ({ products, title, subtitle }) => {
           )}
         </div>
         
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+        {/* Products Grid - Centered with max-width */}
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {products.map((product) => (
+              <div key={product.id} className="flex justify-center">
+                <div className="w-full max-w-xs">
+                  <ProductCard product={product} />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
