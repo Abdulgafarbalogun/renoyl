@@ -7,15 +7,7 @@ import { Facebook, Instagram } from 'lucide-react';
 import { useState } from 'react';
 
 const Footer = () => {
-  const [email, setEmail] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add your newsletter subscription logic here
-    console.log('Subscribed with:', email);
-    setEmail('');
-    // Add success message or notification
-  };
+  
 
   return (
     <footer className="bg-green-800 text-white py-12">
