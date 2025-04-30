@@ -1,25 +1,29 @@
-// components/ProductCard.tsx
+"use client"
 import Image from 'next/image';
 import Link from 'next/link';
+import { useZustandStore } from '../store/zustandStore';
 
-// Define the interface for the product
 interface Product {
   id: number;
   title: string;
-  subtitle?: string; // Optional property
+  subtitle?: string;
   price: number;
   imageUrl: string;
   slug: string;
 }
 
-// Define the props interface for the component
 interface ProductCardProps {
   product: Product;
 }
 
-// Explicitly type the component props
 const ProductCard = ({ product }: ProductCardProps) => {
   const { id, title, subtitle, price, imageUrl, slug } = product;
+  const addItem = useZustandStore((state) => state.addItem);
+
+  const handleAddToCart = () => {
+    console.log('Adding to cart:', product);
+    addItem({ id: id.toString(), name: title, quantity: 1, price: price, imageUrl: imageUrl });
+  };
 
   return (
     <div className="flex flex-col">
@@ -47,6 +51,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
             SHOP
           </span>
         </Link>
+        <button
+          onClick={handleAddToCart}
+          className="inline-block border border-gray-300 rounded-full px-6 py-1 text-sm font-medium text-gray-700 hover:bg-white transition-colors duration-300 mt-2"
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
   );

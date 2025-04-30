@@ -1,3 +1,4 @@
+"use client"
 // components/ProductGrid.tsx
 import ProductCard from './ProductCard';
 

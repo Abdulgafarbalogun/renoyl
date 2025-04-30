@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X, ShoppingCart } from 'lucide-react';
+import CartCount from './CartCount';
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -61,11 +62,12 @@ const Header = () => {
             <Link href="/account" className="uppercase text-sm font-medium text-gray-700 hover:text-green-600 hidden sm:block">
               My Account
             </Link>
-            <Link href="/cart" className="relative">
+            <Link href="/checkout" className="relative">
               <ShoppingCart size={22} />
-              <span className="absolute -top-1 -right-1 bg-green-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+              <CartCount />
+              {/* <span className="absolute -top-1 -right-1 bg-green-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                 0
-              </span>
+              </span> */}
             </Link>
           </div>
         </div>
