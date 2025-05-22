@@ -1,5 +1,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import AuthProvider from '@/components/AuthProvider';
+import Header from '@/components/Header';   
+import SignIn from '@/components/signin';
 
 export const metadata: Metadata = {
   title: 'Renoyl',
@@ -10,7 +13,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen">
-        <main className="flex-1">{children}</main>
+        <AuthProvider>
+          <Header authContentSlot={<SignIn />} />
+          <main className="flex-1">{children}</main>
+        </AuthProvider>
         <footer className="bg-primary-green text-white py-10">
           {/* Footer content here */}
         </footer>

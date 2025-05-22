@@ -104,6 +104,38 @@ const Footer = () => {
               </div>
             </form>
           </div>
+
+          {/* CONTACT US Column */}
+          <div className="col-span-1 lg:col-span-1">
+            <h3 className="text-white uppercase font-medium tracking-wide mb-4">Contact Us</h3>
+            <form className="mt-2">
+              <div className="flex flex-col space-y-2">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  className="px-4 py-2 rounded-md text-gray-800 w-full"
+                  required
+                />
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  className="px-4 py-2 rounded-md text-gray-800 w-full"
+                  required
+                />
+                <textarea
+                  placeholder="Your Message"
+                  className="px-4 py-2 rounded-md text-gray-800 w-full"
+                  required
+                />
+                <button
+                  type="submit"
+                  className="bg-white text-green-800 px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition duration-300"
+                >
+                  Send Message
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
 
         {/* Copyright Section */}

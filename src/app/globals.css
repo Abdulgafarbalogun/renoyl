@@ -36,3 +36,45 @@ body {
   --tw-bg-opacity: 1;
   background-color: #40C0C7;
 }
+
+/* Add to your existing global styles */
+.product-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-title {
+  transition: color 0.3s ease;
+}
+
+.product-card:hover .product-title {
+  color: #2B5F3A;
+}
+
+/* Cart dropdown animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cart-dropdown {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 640px) {
+  .cart-dropdown {
+    position: fixed;
+    top: 60px; /* Adjust based on your header height */
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+}
