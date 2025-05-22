@@ -13,6 +13,7 @@ const Header = () => {
   // Get cart data from Zustand store
   const cart = useZustandStore((state) => state.cart);
   const removeFromCart = useZustandStore((state) => state.removeFromCart);
+  const clearCart = useZustandStore((state) => state.clearCart); // Added clearCart function
   
   const cartItemsCount = cart.reduce((total, item) => total + item.quantity, 0);
   const cartItems = cart;
@@ -23,6 +24,13 @@ const Header = () => {
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  // Function to handle clearing cart with confirmation
+  const handleClearCart = () => {
+    if (window.confirm('Are you sure you want to clear all items from your cart?')) {
+      clearCart();
+    }
   };
 
   return (
@@ -130,11 +138,12 @@ const Header = () => {
                         <span className="font-medium">€{calculateTotal().toFixed(2)}</span>
                       </div>
                       <div className="flex space-x-2">
-                        <Link href="/cart" className="flex-1">
-                          <button className="w-full bg-gray-100 text-gray-800 px-4 py-2 rounded text-sm">
-                            View Cart
-                          </button>
-                        </Link>
+                        <button 
+                          onClick={handleClearCart}
+                          className="flex-1 w-full bg-gray-100 text-gray-800 px-4 py-2 rounded text-sm hover:bg-red-100"
+                        >
+                          Clear Cart
+                        </button>
                         <Link href="/checkout" className="flex-1">
                           <button className="w-full bg-green-600 text-white px-4 py-2 rounded text-sm">
                             Checkout
