@@ -65,20 +65,20 @@ const ProductGrid = ({ products, title, subtitle }: ProductGridProps) => {
             </div>
             
             {/* Buttons */}
-            <div className="text-center flex flex-col space-y-2">
+            <div className="text-center flex gap-3 justify-center">
+              <Link
+                href={`/products/${product.id}`}
+                className="flex-1 max-w-[120px] border border-gray-300 text-gray-700 px-6 py-2.5 text-sm font-medium rounded-full hover:bg-gray-50 transition-colors duration-200 text-center"
+              >
+                SHOP
+              </Link>
               <button
                 onClick={() => handleAddToCart(product)}
-                className="w-full bg-[#2B5F3A] text-white px-6 py-2 rounded hover:bg-[#224a2e] transition"
+                className="flex-1 max-w-[120px] bg-gray-100 text-gray-700 px-6 py-2.5 text-sm font-medium rounded-full hover:bg-gray-200 transition-colors duration-200"
                 aria-label={`Add ${product.title} to cart`}
               >
                 Add to Cart
               </button>
-              <Link
-                href={`/products/${product.id}`}
-                className="inline-block border border-gray-400 text-gray-800 px-12 py-3 text-sm font-medium uppercase tracking-wide hover:bg-gray-50 transition-colors duration-200"
-              >
-                SHOP
-              </Link>
             </div>
           </div>
         ))}

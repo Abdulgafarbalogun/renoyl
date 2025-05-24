@@ -13,7 +13,7 @@ const productData = [
     name: 'Essential Hair Oil (30ml)',
     price: 25,
     description: 'Formulated with natural ingredients to nourish your hair and scalp. Our unique blend helps combat hair loss while promoting healthy growth.',
-    image: '/img/product-bottle.jpg',
+    image: '/img/essential-oil.png', // Changed from /img/product-bottle.jpg
     ingredients: 'Jojoba Oil, Argan Oil, Rosemary Extract, Peppermint Oil, Vitamin E'
   },
   {
@@ -21,7 +21,7 @@ const productData = [
     name: 'Scalp Serum',
     price: 20,
     description: 'Intensive treatment for scalp health. Helps reduce dandruff and itchiness while promoting hair growth.',
-    image: '/img/product-bottle.jpg',
+    image: '/img/essential-oil.png', // Changed from /img/product-bottle.jpg
     ingredients: 'Aloe Vera, Tea Tree Oil, Biotin, Caffeine, Niacinamide'
   }
 ];
@@ -108,14 +108,14 @@ const ProductPage = () => {
 
         {/* Product Details Section */}
         <div className="grid md:grid-cols-2 gap-12 mb-16">
-          {/* Product Image */}
-          <div className="bg-[#EDE4E1] rounded-lg p-8 flex items-center justify-center">
+          {/* Product Image Container */}
+          <div className="bg-[#EDE4E1] rounded-lg p-8 flex items-center justify-center aspect-square"> {/* Added aspect-square for a consistent container shape */} 
             <Image
               src={product.image}
               alt={product.name}
-              width={300}
-              height={400}
-              className="mx-auto"
+              width={500}  // Provide a base width, height will be auto or constrained by aspect ratio
+              height={500} // Provide a base height
+              className="object-contain max-h-full max-w-full" // Ensure it respects container bounds
             />
           </div>
 
@@ -189,9 +189,9 @@ const ProductPage = () => {
                   <Image
                     src={relatedProduct.image}
                     alt={relatedProduct.name}
-                    width={150}
-                    height={200}
-                    className="mx-auto"
+                    width={150} // You can adjust width if needed
+                    height={150} // Adjusted from 200, change as needed
+                    className="mx-auto object-contain" // Added object-contain
                   />
                 </div>
                 <h3 className="font-medium group-hover:text-green-600 transition-colors">{relatedProduct.name}</h3>
