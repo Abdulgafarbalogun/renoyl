@@ -5,6 +5,11 @@ import EmailProvider from "next-auth/providers/email";
 import { PrismaClient } from "@prisma/client";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
+// Augment the globalThis type to include prisma
+declare global {
+  var prisma: PrismaClient | undefined;
+}
+
 // Prisma instance (using globalThis for better practice)
 const prisma = globalThis.prisma || new PrismaClient();
 if (process.env.NODE_ENV !== "production") {

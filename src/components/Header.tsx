@@ -6,13 +6,16 @@ import Image from 'next/image';
 import { Menu, X, ShoppingBag, Trash } from 'lucide-react';
 import { useZustandStore } from '../store/zustandStore';
 
-const Header = () => {
+// Define the props type for the Header component
+// Remove HeaderProps interface and authContentSlot from component props
+
+const Header = () => { // Removed authContentSlot from props
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   
   // Get cart data from Zustand store
   const cart = useZustandStore((state) => state.cart);
-  const removeFromCart = useZustandStore((state) => state.removeFromCart);
+  const removeItem = useZustandStore((state) => state.removeItem); // Changed from removeFromCart to removeItem
   const clearCart = useZustandStore((state) => state.clearCart); // Added clearCart function
   
   const cartItemsCount = cart.reduce((total, item) => total + item.quantity, 0);
@@ -63,12 +66,13 @@ const Header = () => {
         </div>
         
         <div className="flex items-center space-x-6">
-          <Link
-            href="/signin"
-            className="uppercase text-sm font-medium text-gray-700 hover:text-green-600 hidden sm:block"
-          >
-            My Account
-          </Link>
+          {/* Replace the existing My Account link with the authContentSlot */}
+          <div className="hidden sm:block">
+            {/* {authContentSlot} */}
+            <Link href="/signin" className="uppercase text-sm font-medium text-gray-700 hover:text-green-600">
+              My Account
+            </Link>
+          </div>
           
           <div className="relative">
             <button 
@@ -120,7 +124,7 @@ const Header = () => {
                             <div className="flex items-center mt-1">
                               <span className="text-xs mr-2">Qty: {item.quantity}</span>
                               <button 
-                                onClick={() => removeFromCart(item.id)}
+                                onClick={() => removeItem(item.id)} // Changed from removeFromCart to removeItem
                                 className="text-gray-400 hover:text-gray-600"
                                 aria-label="Remove item"
                               >
@@ -165,7 +169,8 @@ const Header = () => {
             <nav className="flex flex-col space-y-4">
               <Link href="/shop" onClick={toggleMobileMenu}>Shop</Link>
               <Link href="/about" onClick={toggleMobileMenu}>About</Link>
-              <Link href="/account" onClick={toggleMobileMenu}>My Account</Link>
+              {/* Ensure the link here also points to /signin */}
+              <Link href="/signin" onClick={toggleMobileMenu}>My Account</Link>
             </nav>
           </div>
         </div>

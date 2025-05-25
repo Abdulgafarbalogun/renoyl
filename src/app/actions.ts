@@ -1,14 +1,14 @@
 // src/app/actions.ts
 "use server";
 
-import { signIn, signOut } from "@/lib/auth"; // Import from your updated auth file
+// import { signIn, signOut } from "@/lib/auth"; // Assuming these are your actual auth functions
 
 export async function signInWithGoogle() {
-  // You can specify a callbackUrl or redirectTo in the options if needed
-  await signIn("google", { redirectTo: "/" });
+  // await signIn("google"); // Replace with your actual Google sign-in logic
+  console.log("Attempting Google Sign In");
 }
 
 export async function signOutUser() {
-  // You can specify a callbackUrl or redirectTo in the options if needed
-  await signOut({ redirectTo: "/signin" });
+  // await signOut(); // Replace with your actual sign-out logic
+  console.log("Attempting Sign Out");
 }

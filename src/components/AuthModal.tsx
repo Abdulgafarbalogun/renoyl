@@ -2,15 +2,22 @@
 "use client";
 
 import { X } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, ReactNode } from 'react'; // Import ReactNode
 
 // DO NOT import SignIn here
 // import SignIn from './SignIn';
 
-export default function AuthModal({ isOpen, onClose, children }) {
+// Define an interface for the component's props
+interface AuthModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: ReactNode;
+}
+
+export default function AuthModal({ isOpen, onClose, children }: AuthModalProps) {
   // Effect to handle Escape key and body scroll
   useEffect(() => {
-    const handleEsc = (event) => {
+    const handleEsc = (event: KeyboardEvent) => { // Add KeyboardEvent type to event
       if (event.key === 'Escape') {
         onClose();
       }

@@ -22,7 +22,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   const handleAddToCart = () => {
     console.log('Adding to cart:', product);
-    addItem({ id: id.toString(), name: title, quantity: 1, price: price, imageUrl: imageUrl });
+    addItem({ id: id, name: title, quantity: 1, price: price, imageUrl: imageUrl });
   };
 
   return (

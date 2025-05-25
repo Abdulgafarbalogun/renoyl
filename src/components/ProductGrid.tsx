@@ -1,3 +1,5 @@
+"use client"; // Add this directive at the top
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -23,7 +25,7 @@ const ProductGrid = ({ products, title, subtitle }: ProductGridProps) => {
   
   const handleAddToCart = (product: Product) => {
     addItem({
-      id: product.id,
+      id: product.id, 
       name: product.title,
       price: product.price,
       imageUrl: product.imageUrl,

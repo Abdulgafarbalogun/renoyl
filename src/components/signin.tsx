@@ -1,32 +1,30 @@
 // src/components/signin.tsx
-// src/components/signin.tsx
 import { auth } from "@/lib/auth";
 import { signInWithGoogle, signOutUser } from "@/app/actions";
+import type { User } from "next-auth"; // Import User type
 
-export default async function SignIn() {
-  const session = await auth();
-  const user = session?.user;
+interface SignInProps {
+  user: User | undefined;
+}
 
-  console.log("Session:", session);
-  console.log("User:", user);
+export default function SignIn({ user }: SignInProps) { // Remove async, add user prop
+  // const session = await auth(); // Remove this line
+  // const user = session?.user; // Remove this line
+
+  // console.log("Session:", session); // Remove or comment out
+  // console.log("User:", user); // Remove or comment out
 
   return (
     <div>
       {user ? (
-        <form action={async () => {
-          "use server";
-          await signOutUser();
-        }}>
+        <form action={signOutUser}>
           <p className="mb-2">Signed in as {user.email}</p>
           <button type="submit" className="w-full px-4 py-2 text-white bg-red-600 rounded-md hover:bg-red-700">
             Sign Out
           </button>
         </form>
       ) : (
-        <form action={async () => {
-          "use server";
-          await signInWithGoogle();
-        }}>
+        <form action={signInWithGoogle}>
           <p className="mb-4 text-center">Sign in to continue.</p>
           <button type="submit" className="w-full px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700">
             Sign In with Google
