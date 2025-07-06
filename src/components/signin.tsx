@@ -1,19 +1,13 @@
 // src/components/signin.tsx
-import { auth } from "@/lib/auth";
+// import { auth } from "@/lib/auth";
 import { signInWithGoogle, signOutUser } from "@/app/actions";
-import type { User } from "next-auth"; // Import User type
+// import type { User } from "next-auth"; // Import User type
 
 interface SignInProps {
-  user: User | undefined;
+  user: any | undefined;
 }
 
-export default function SignIn({ user }: SignInProps) { // Remove async, add user prop
-  // const session = await auth(); // Remove this line
-  // const user = session?.user; // Remove this line
-
-  // console.log("Session:", session); // Remove or comment out
-  // console.log("User:", user); // Remove or comment out
-
+export default function SignIn({ user }: SignInProps) {
   return (
     <div>
       {user ? (

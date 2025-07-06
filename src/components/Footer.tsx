@@ -7,12 +7,19 @@ import { Facebook, Instagram } from 'lucide-react';
 import { useState } from 'react';
 
 const Footer = () => {
+  const [email, setEmail] = useState('');
   
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle newsletter signup logic here
+    console.log('Email submitted:', email);
+    setEmail('');
+  };
 
   return (
     <footer className="bg-green-800 text-white py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
           {/* EXPLORE Column */}
           <div className="col-span-1">
             <h3 className="text-white uppercase font-medium tracking-wide mb-4">Explore</h3>
@@ -28,8 +35,8 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/help-faq" className="text-white hover:text-green-200 text-sm">
-                  Help/FAQ
+                <Link href="/contact-us" className="text-white hover:text-green-200 text-sm">
+                  Contact us
                 </Link>
               </li>
             </ul>
@@ -62,99 +69,48 @@ const Footer = () => {
             <h3 className="text-white uppercase font-medium tracking-wide mb-4">Contact</h3>
             <ul className="space-y-2">
               <li className="text-sm">
-                <a href="mailto:info@rentyl.com" className="text-white hover:text-green-200">
-                  info@rentyl.com
-                </a>
-              </li>
-              <li className="flex space-x-3 mt-3">
-                <a href="https://facebook.com/rentyl" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-200">
-                  <Facebook size={20} />
-                </a>
-                <a href="https://instagram.com/rentyl" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-200">
-                  <Instagram size={20} />
+                <a href="mailto:info@renoyl.com" className="text-white hover:text-green-200">
+                  info@renoyl.com
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* FOLLOW Column - Empty in the design */}
-          <div className="col-span-1 lg:col-span-1">
+          {/* FOLLOW Column */}
+          <div className="col-span-1">
             <h3 className="text-white uppercase font-medium tracking-wide mb-4">Follow</h3>
+            <div className="flex space-x-3">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-200">
+                <Facebook size={20} />
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-200">
+                <Instagram size={20} />
+              </a>
+            </div>
           </div>
 
           {/* JOIN OUR COMMUNITY Column */}
-          <div className="col-span-1 lg:col-span-1">
+          <div className="col-span-1">
             <h3 className="text-white uppercase font-medium tracking-wide mb-4">Join our community</h3>
-            <form className="mt-2">
+            <form onSubmit={handleSubmit} className="mt-2">
               <div className="flex flex-col space-y-2">
                 <input
                   type="email"
-                  // value={email}
-                  // onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your email address"
                   className="px-4 py-2 rounded-md text-gray-800 w-full"
                   required
                 />
                 <button
                   type="submit"
-                  className="bg-white text-green-800 px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition duration-300"
+                  className="bg-white text-green-800 px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition duration-300 uppercase"
                 >
-                  SUBMIT
+                  Submit
                 </button>
               </div>
             </form>
           </div>
-
-          {/* CONTACT US Column */}
-          <div className="col-span-1 lg:col-span-1">
-            <h3 className="text-white uppercase font-medium tracking-wide mb-4">Contact Us</h3>
-            <form className="mt-2">
-              <div className="flex flex-col space-y-2">
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="px-4 py-2 rounded-md text-gray-800 w-full"
-                  required
-                />
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  className="px-4 py-2 rounded-md text-gray-800 w-full"
-                  required
-                />
-                <textarea
-                  placeholder="Your Message"
-                  className="px-4 py-2 rounded-md text-gray-800 w-full"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="bg-white text-green-800 px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition duration-300"
-                >
-                  Send Message
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        {/* Copyright Section */}
-        <div className="mt-8 pt-8 border-t border-green-700 text-center">
-          <div className="flex justify-center mb-4">
-            <Link href="/">
-              <div className="relative h-8 w-24">
-                <Image
-                  src="/img/logo.png" // You would need a white version of your logo
-                  alt="Rentyl Logo"
-                  fill
-                  style={{ objectFit: 'contain' }}
-                />
-              </div>
-            </Link>
-          </div>
-          <p className="text-xs text-green-200">
-            © {new Date().getFullYear()} Rentyl. All rights reserved.
-          </p>
         </div>
       </div>
     </footer>
