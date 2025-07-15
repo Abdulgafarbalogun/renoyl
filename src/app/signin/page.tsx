@@ -1,10 +1,11 @@
 // src/app/signin/page.tsx
 import SignIn from '@/components/signin';
 import Link from 'next/link';
-import { auth } from '@/lib/auth'; // Import auth to get session
+import { getServerSession } from "next-auth/next";
+import { authOptions } from '@/lib/auth';
 
-export default async function SignInPage() { // Make the component async
-  const session = await auth(); // Fetch session data
+export default async function SignInPage() {
+  const session = await getServerSession(authOptions);
   const user = session?.user;
 
   return (
