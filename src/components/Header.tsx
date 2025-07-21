@@ -48,7 +48,7 @@ const Header = () => { // Removed authContentSlot from props
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
           <nav className="hidden md:flex space-x-8">
-            <Link href="/shop" className="uppercase text-sm font-medium text-gray-700 hover:text-green-600">
+            <Link href="#" className="uppercase text-sm font-medium text-gray-700 hover:text-green-600">
               Shop
             </Link>
             <Link href="/about" className="uppercase text-sm font-medium text-gray-700 hover:text-green-600">
