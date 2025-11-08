@@ -1,3 +1,36 @@
+# Static Deployment (Temporary Auth Removal)
+
+This project has been temporarily converted to a static export for deployment on shared hosting (no Node.js runtime).
+
+## Commands
+
+Build and export static site:
+
+```
+npm run build
+```
+
+Output goes to `out/` — upload its contents to your hosting root.
+
+## Removed for Static Mode
+- NextAuth routes and config
+- Prisma and database usage
+- Sign-in page/components
+
+## Product Data
+Static product data lives in `src/data/products.ts` and is used at build time.
+
+## Reverting Later
+To restore dynamic features:
+1. Re-add dependencies: next-auth, @prisma/client, prisma, @next-auth/prisma-adapter
+2. Restore `api/auth/[...nextauth]` route and `lib/auth.ts`
+3. Remove `output: 'export'` from `next.config.ts`
+4. Switch build script back to `next build` only
+5. Reintroduce database and environment variables
+
+## Notes
+`next/image` is set to `unoptimized` for static compatibility.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
