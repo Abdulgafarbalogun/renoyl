@@ -5,6 +5,7 @@ export interface ProductItem {
   description: string;
   image: string;
   ingredients: string;
+  priceId: string;
 }
 
 export const products: ProductItem[] = [
@@ -14,7 +15,8 @@ export const products: ProductItem[] = [
     price: 25,
     description: 'Formulated with natural ingredients to nourish your hair and scalp. Our unique blend helps combat hair loss while promoting healthy growth.',
     image: '/img/essential-oil.png',
-    ingredients: 'Jojoba Oil, Argan Oil, Rosemary Extract, Peppermint Oil, Vitamin E'
+    ingredients: 'Jojoba Oil, Argan Oil, Rosemary Extract, Peppermint Oil, Vitamin E',
+    priceId: 'price_1...' // Replace with your actual Price ID from Stripe
   },
   {
     id: 2,
@@ -22,7 +24,8 @@ export const products: ProductItem[] = [
     price: 20,
     description: 'Intensive treatment for scalp health. Helps reduce dandruff and itchiness while promoting hair growth.',
     image: '/img/essential-oil.png',
-    ingredients: 'Aloe Vera, Tea Tree Oil, Biotin, Caffeine, Niacinamide'
+    ingredients: 'Aloe Vera, Tea Tree Oil, Biotin, Caffeine, Niacinamide',
+    priceId: 'price_1...' // Replace with your actual Price ID from Stripe
   }
 ];
 

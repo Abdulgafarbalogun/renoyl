@@ -2,6 +2,7 @@
 import React from 'react';
 import { useZustandStore } from '@/store/zustandStore';
 import type { ProductItem } from '@/data/products';
+import CheckoutButton from '@/components/CheckoutButton';
 
 export default function ProductDetailClient({ product }: { product: ProductItem }) {
   const [quantity, setQuantity] = React.useState(1);
@@ -49,6 +50,7 @@ export default function ProductDetailClient({ product }: { product: ProductItem 
           Add to Cart
         </button>
       </div>
+      <CheckoutButton priceId={product.priceId} productName={product.name} />
     </div>
   );
 }

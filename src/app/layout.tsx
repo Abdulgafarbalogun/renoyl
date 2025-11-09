@@ -1,8 +1,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import AuthProvider from '@/components/AuthProvider';
-import Header from '@/components/Header';   
-// import SignIn from '@/components/signin'; // No longer needed here for Header
+import Header from '@/components/Header';
+import StripeProvider from '@/components/StripeProvider'; // Import StripeProvider
 
 export const metadata: Metadata = {
   title: 'Renoyl',
@@ -14,8 +14,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className="flex flex-col min-h-screen">
         <AuthProvider>
-          <Header /> {/* Remove authContentSlot prop */}
-          <main className="flex-1">{children}</main>
+          <StripeProvider> {/* Wrap with StripeProvider */}
+            <Header />
+            <main className="flex-1">{children}</main>
+          </StripeProvider>
         </AuthProvider>
         <footer className="bg-primary-green text-white py-10">
           {/* Footer content here */}

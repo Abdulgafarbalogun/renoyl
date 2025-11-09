@@ -1,69 +1,105 @@
-# Static Deployment (Temporary Auth Removal)
+# Renoyl - A Next.js E-commerce Site
 
-This project has been temporarily converted to a static export for deployment on shared hosting (no Node.js runtime).
+This is a [Next.js](https://nextjs.org) project for a simple e-commerce website. It is configured for static site generation for easy deployment on any web hosting service.
 
-## Commands
+## Features
 
-Build and export static site:
-
-```
-npm run build
-```
-
-Output goes to `out/` — upload its contents to your hosting root.
-
-## Removed for Static Mode
-- NextAuth routes and config
-- Prisma and database usage
-- Sign-in page/components
-
-## Product Data
-Static product data lives in `src/data/products.ts` and is used at build time.
-
-## Reverting Later
-To restore dynamic features:
-1. Re-add dependencies: next-auth, @prisma/client, prisma, @next-auth/prisma-adapter
-2. Restore `api/auth/[...nextauth]` route and `lib/auth.ts`
-3. Remove `output: 'export'` from `next.config.ts`
-4. Switch build script back to `next build` only
-5. Reintroduce database and environment variables
-
-## Notes
-`next/image` is set to `unoptimized` for static compatibility.
-
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+- **Static Site Generation**: The entire site is pre-built into HTML, CSS, and JavaScript files for maximum performance and portability.
+- **Product Showcase**: Displays products from a static data source.
+- **Shopping Cart**: Client-side cart functionality using Zustand for state management.
+- **Stripe Integration**: Client-side payment processing with Stripe Checkout.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (v18 or later)
+- npm, yarn, or pnpm
+
+### 1. Clone the repository
+
+```bash
+git clone <repository-url>
+cd <repository-directory>
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up environment variables
+
+Create a file named `.env.local` in the root of your project and add your Stripe publishable key.
+
+```
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_YOUR_STRIPE_PUBLISHABLE_KEY
+```
+
+You can find your API keys in the [Stripe Dashboard](https://dashboard.stripe.com/apikeys).
+
+### 4. Update Product Information
+
+Product data is managed statically in `src/data/products.ts`. To add or modify products, you need to edit this file.
+
+Each product requires a `priceId` from your Stripe account. To create products and prices in Stripe:
+
+1.  Go to the **Products** section in your [Stripe Dashboard](https://dashboard.stripe.com/products).
+2.  Click **+ Add product**.
+3.  Fill in the product details (name, description, image).
+4.  Under **Pricing**, set the price.
+5.  After saving, click on the product to view its details.
+6.  In the **Pricing** section, you will find the **API ID** for the price (e.g., `price_1...`). This is the `priceId` you need to add to your `products.ts` file.
+
+Example `products.ts` entry:
+
+```typescript
+{
+  id: 1,
+  name: 'Renoyl Hair Growth Oil',
+  description: 'A potent blend for stimulating hair growth.',
+  price: 55.00,
+  image: '/img/product1.jpg',
+  priceId: 'price_1PEXAMPLE...', // Your Stripe Price ID here
+},
+```
+
+### 5. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Build the static site
 
-## Learn More
+To build the site for production, run:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This command will generate a static version of your site in the `out/` directory.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Deploy
 
-## Deploy on Vercel
+Upload the contents of the `out/` directory to any static hosting provider, such as:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+-   Vercel
+-   Netlify
+-   GitHub Pages
+-   Any shared hosting service that can serve static files.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Since the site is fully static, no Node.js server is required for deployment.
+
+## Technical Stack
+
+-   **Framework**: [Next.js](https://nextjs.org/) (with Static Site Generation)
+-   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+-   **State Management**: [Zustand](https://github.com/pmndrs/zustand)
+-   **Payments**: [Stripe Checkout](https://stripe.com/docs/checkout)
+-   **Language**: [TypeScript](https://www.typescriptlang.org/)
