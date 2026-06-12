@@ -6,12 +6,12 @@ import Image from 'next/image';
 import { useZustandStore } from '../store/zustandStore';
 
 interface Product {
-  id: number;
+  id: string | number;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   price: number;
   imageUrl: string;
-  slug: string;
+  slug?: string;
 }
 
 interface ProductGridProps {
@@ -25,11 +25,11 @@ const ProductGrid = ({ products, title, subtitle }: ProductGridProps) => {
   
   const handleAddToCart = (product: Product) => {
     addItem({
-      id: product.id, 
+      id: String(product.id),
       name: product.title,
-      price: product.price,
+      price: Number(product.price),
       imageUrl: product.imageUrl,
-      quantity: 1
+      quantity: 1,
     });
   };
   
@@ -62,7 +62,7 @@ const ProductGrid = ({ products, title, subtitle }: ProductGridProps) => {
                 {product.title}
               </h3>
               <p className="font-semibold text-base text-gray-900">
-                €{product.price.toFixed(2)}
+                €{Number(product.price).toFixed(2)}
               </p>
             </div>
             

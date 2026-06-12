@@ -1,12 +1,17 @@
-import React from 'react';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 
-const AboutPage = () => {
+export const metadata: Metadata = {
+  title: 'About — Renoyl',
+  description: 'Learn about Renoyl — premium hair oils formulated to combat hair loss, boost volume, and nurture a healthy scalp.',
+};
+
+export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#F9F1EE] pt-24">
+    <div className="min-h-screen bg-[#F9F1EE] py-16">
       <div className="container mx-auto px-4">
         <h1 className="text-center text-2xl font-semibold mb-4">About</h1>
-        
+
         <div className="max-w-3xl mx-auto text-center mb-12">
           <h2 className="text-xl font-medium mb-4">Our Story</h2>
           <p className="text-gray-700 mb-8">
@@ -15,18 +20,11 @@ const AboutPage = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 items-center max-w-6xl mx-auto">
-          <div className="bg-[#EDE4E1] rounded-lg p-8">
-            <Image
-              src="/img/logo.png"
-              alt="Renoyl Logo"
-              width={200}
-              height={200}
-              className="mx-auto"
-            />
+          <div className="bg-[#EDE4E1] rounded-lg p-8 flex items-center justify-center">
+            <Image src="/img/logo.png" alt="Renoyl Logo" width={200} height={200} className="mx-auto" />
           </div>
-          
           <div className="space-y-6">
-            <h2 className="text-xl font-medium">Our Story</h2>
+            <h2 className="text-xl font-medium">Our Mission</h2>
             <p className="text-gray-700">
               Explore our variety of hair oil, formulated to combat hair loss, boost volume and nurture a healthy scalp. Begin your transformation today.
             </p>
@@ -35,6 +33,4 @@ const AboutPage = () => {
       </div>
     </div>
   );
-};
-
-export default AboutPage;
+}

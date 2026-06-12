@@ -1,10 +1,19 @@
 "use client";
 import React from 'react';
 import { useZustandStore } from '@/store/zustandStore';
-import type { ProductItem } from '@/data/products';
 import CheckoutButton from '@/components/CheckoutButton';
 
-export default function ProductDetailClient({ product }: { product: ProductItem }) {
+interface ClientProduct {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  ingredients: string;
+  image: string;
+  priceId: string;
+}
+
+export default function ProductDetailClient({ product }: { product: ClientProduct }) {
   const [quantity, setQuantity] = React.useState(1);
   const addItem = useZustandStore((state) => state.addItem);
 
@@ -12,9 +21,9 @@ export default function ProductDetailClient({ product }: { product: ProductItem 
     addItem({
       id: product.id,
       name: product.name,
-      price: product.price,
+      price: Number(product.price),
       imageUrl: product.image,
-      quantity
+      quantity,
     });
   };
 
@@ -23,7 +32,7 @@ export default function ProductDetailClient({ product }: { product: ProductItem 
       <h1 className="text-2xl font-medium">{product.name}</h1>
       <p className="text-gray-700">{product.description}</p>
       <div className="bg-[#EDE4E1] inline-block px-4 py-2 rounded">
-        <span className="font-medium">£{product.price}</span>
+        <span className="font-medium">£{Number(product.price).toFixed(2)}</span>
       </div>
       <div className="space-y-2">
         <label htmlFor="quantity" className="block text-sm font-medium">Qty</label>

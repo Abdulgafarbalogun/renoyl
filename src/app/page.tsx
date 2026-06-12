@@ -1,23 +1,26 @@
-// Static exported homepage (auth removed)
-import Navigation from '@/components/Navigation';
-import Header from '@/components/Header';
+import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
 import ProductShowcase from '@/components/ProductShowcase';
 import ImageGallery from '@/components/ImageGallery';
 import CustomerReviews from '@/components/CustomerReviews';
-import Footer from '@/components/Footer';
-export default async function Home() { 
 
+export const metadata: Metadata = {
+  title: 'Renoyl — Premium Hair Oils',
+  description: 'Premium hair oils formulated to combat hair loss, boost volume and nurture a healthy scalp.',
+  openGraph: {
+    title: 'Renoyl — Premium Hair Oils',
+    description: 'Premium hair oils formulated to combat hair loss, boost volume and nurture a healthy scalp.',
+    type: 'website',
+  },
+};
+
+export default function Home() {
   return (
     <>
-      <Header /> {/* Removed authContentSlot prop */}
       <Hero />
       <ProductShowcase />
       <ImageGallery />
       <CustomerReviews />
-      <Footer />
     </>
   );
 }
-
-// (Previous auth-dependent variant removed for static deployment.)

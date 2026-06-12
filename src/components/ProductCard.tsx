@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useZustandStore } from '../store/zustandStore';
 
 interface Product {
-  id: number;
+  id: string | number;
   title: string;
   subtitle?: string;
   price: number;
@@ -22,7 +22,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   const handleAddToCart = () => {
     console.log('Adding to cart:', product);
-    addItem({ id: id, name: title, quantity: 1, price: price, imageUrl: imageUrl });
+    addItem({ id: String(id), name: title, quantity: 1, price: price, imageUrl: imageUrl });
   };
 
   return (
@@ -45,7 +45,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       <div className="bg-green-50 p-4 rounded-lg text-center">
         <h3 className="text-sm font-medium text-gray-800 mb-1">{title}</h3>
         {subtitle && <p className="text-xs text-gray-600 mb-2">{subtitle}</p>}
-        <p className="font-bold text-lg mb-3">${price.toFixed(2)}</p>
+        <p className="font-bold text-lg mb-3">${Number(price).toFixed(2)}</p>
         <Link href={`/shop/${slug}`}>
           <span className="inline-block border border-gray-300 rounded-full px-6 py-1 text-sm font-medium text-gray-700 hover:bg-white transition-colors duration-300">
             SHOP

@@ -18,16 +18,11 @@ export default function CheckoutButton({ priceId, productName }: CheckoutButtonP
 
     try {
       // 1. Call your new API route to create a checkout session
-      const response = await fetch('/api/checkout_sessions', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+      const response = await fetch(`${apiUrl}/stripe/checkout-session`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          priceId, 
-          productName,
-          origin: window.location.origin 
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ priceId, origin: window.location.origin }),
       });
 
       if (!response.ok) {

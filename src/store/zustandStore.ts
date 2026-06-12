@@ -1,7 +1,8 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-interface CartItem {
-  id: number; // Changed from string to number
+export interface CartItem {
+  id: string;
   name: string;
   quantity: number;
   price: number;
@@ -11,30 +12,40 @@ interface CartItem {
 interface CartState {
   cart: CartItem[];
   addItem: (item: CartItem) => void;
-  removeItem: (id: number) => void; // Changed from string to number
-  updateItemQuantity: (id: number, quantity: number) => void; // Changed from string to number
+  removeItem: (id: string) => void;
+  updateItemQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
+  getItemCount: () => number;
+  getTotalPrice: () => number;
 }
 
-export const useZustandStore = create<CartState>((set) => ({
-  cart: [],
-  addItem: (item) =>
-    set((state) => {
-      const existingItem = state.cart.find((cartItem) => cartItem.id === item.id);
-      if (existingItem) {
-        return {
-          cart: state.cart.map((cartItem) =>
-            cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + item.quantity } : cartItem
-          ),
-        };
-      } else {
-        return { cart: [...state.cart, item] };
-      }
+export const useZustandStore = create<CartState>()(
+  persist(
+    (set, get) => ({
+      cart: [],
+      addItem: (item) =>
+        set((state) => {
+          const existing = state.cart.find((c) => c.id === item.id);
+          if (existing) {
+            return {
+              cart: state.cart.map((c) =>
+                c.id === item.id ? { ...c, quantity: c.quantity + item.quantity } : c,
+              ),
+            };
+          }
+          return { cart: [...state.cart, item] };
+        }),
+      removeItem: (id) =>
+        set((state) => ({ cart: state.cart.filter((c) => c.id !== id) })),
+      updateItemQuantity: (id, quantity) =>
+        set((state) => ({
+          cart: state.cart.map((c) => (c.id === id ? { ...c, quantity } : c)),
+        })),
+      clearCart: () => set({ cart: [] }),
+      getItemCount: () => get().cart.reduce((sum, item) => sum + item.quantity, 0),
+      getTotalPrice: () =>
+        get().cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
     }),
-  removeItem: (id) => set((state) => ({ cart: state.cart.filter((item) => item.id !== id) })),
-  updateItemQuantity: (id, quantity) =>
-    set((state) => ({
-      cart: state.cart.map((item) => (item.id === id ? { ...item, quantity } : item)),
-    })),
-  clearCart: () => set({ cart: [] }),
-}));
+    { name: 'renoyl-cart' },
+  ),
+);
