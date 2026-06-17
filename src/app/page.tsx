@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+
+export const dynamic = 'force-dynamic';
 import Hero from '@/components/Hero';
 import ProductShowcase from '@/components/ProductShowcase';
 import ImageGallery from '@/components/ImageGallery';

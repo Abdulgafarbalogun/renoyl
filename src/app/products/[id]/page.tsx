@@ -53,55 +53,68 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
   };
 
   return (
-    <div className="min-h-screen bg-[#F9F1EE]">
-      <div className="container mx-auto px-4 py-12">
-        <div className="text-sm mb-6">
-          <Link href="/" className="text-gray-500 hover:text-gray-700">Home</Link> /
-          <Link href="/shop" className="text-gray-500 hover:text-gray-700 mx-1">Shop</Link> /
-          <span className="text-gray-700">{product.name}</span>
-        </div>
+    <div className="bg-[#F9F7F2] min-h-screen">
+      <div className="container mx-auto px-6 lg:px-12 py-10">
 
-        <div className="grid md:grid-cols-2 gap-12 mb-16">
-          <div className="bg-[#EDE4E1] rounded-lg p-8 flex items-center justify-center aspect-square">
+        {/* Breadcrumb */}
+        <nav className="flex items-center gap-2 text-sm text-gray-400 mb-12">
+          <Link href="/" className="hover:text-[#2B5F3A] transition-colors">Home</Link>
+          <span>/</span>
+          <Link href="/shop" className="hover:text-[#2B5F3A] transition-colors">Shop</Link>
+          <span>/</span>
+          <span className="text-gray-700">{product.name}</span>
+        </nav>
+
+        {/* Product */}
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 mb-20">
+          <div className="bg-[#EDE4E1] rounded-3xl p-10 flex items-center justify-center aspect-square">
             <Image
               src={product.images?.[0] || '/img/essential-oil.png'}
               alt={product.name}
               width={500}
               height={500}
-              className="object-contain max-h-full max-w-full"
+              className="object-contain max-h-full max-w-full transition-transform duration-700 hover:scale-105"
             />
           </div>
           <ProductDetailClient product={clientProduct} />
         </div>
 
-        <div className="mb-16">
-          <h2 className="text-xl font-medium mb-4 text-center">Ingredients</h2>
-          <div className="max-w-3xl mx-auto">
-            <p className="text-gray-700 text-center">{product.ingredients}</p>
+        {/* Ingredients */}
+        {product.ingredients && (
+          <div className="bg-white rounded-3xl px-12 py-14 mb-20 text-center">
+            <span className="block text-[#2B5F3A] text-xs font-medium tracking-widest uppercase mb-4">
+              Key Ingredients
+            </span>
+            <h2 className="text-3xl font-light text-gray-900 mb-6">What&apos;s Inside</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">{product.ingredients}</p>
           </div>
-        </div>
+        )}
 
+        {/* Related products */}
         {related.length > 0 && (
           <div>
-            <h2 className="text-xl font-medium mb-8 text-center">RELATED PRODUCTS</h2>
+            <div className="text-center mb-12">
+              <span className="block text-[#2B5F3A] text-xs font-medium tracking-widest uppercase mb-4">
+                You May Also Like
+              </span>
+              <h2 className="text-3xl font-light text-gray-900">Related Products</h2>
+            </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {related.map((p) => (
-                <Link
-                  href={`/products/${p.id}`}
-                  key={p.id}
-                  className="text-center group"
-                >
-                  <div className="bg-[#EDE4E1] rounded-lg p-4 mb-3 transition-transform duration-300 group-hover:scale-105">
+                <Link href={`/products/${p.id}`} key={p.id} className="group">
+                  <div className="bg-[#EDE4E1] rounded-2xl p-6 mb-4 aspect-square flex items-center justify-center overflow-hidden">
                     <Image
                       src={p.images?.[0] || '/img/essential-oil.png'}
                       alt={p.name}
                       width={150}
                       height={150}
-                      className="mx-auto object-contain"
+                      className="object-contain transition-transform duration-500 group-hover:scale-110"
                     />
                   </div>
-                  <h3 className="font-medium group-hover:text-green-600 transition-colors">{p.name}</h3>
-                  <p className="text-gray-700">£{Number(p.price).toFixed(2)}</p>
+                  <h3 className="font-medium text-gray-900 text-sm group-hover:text-[#2B5F3A] transition-colors">
+                    {p.name}
+                  </h3>
+                  <p className="text-gray-500 text-sm mt-1">£{Number(p.price).toFixed(2)}</p>
                 </Link>
               ))}
             </div>

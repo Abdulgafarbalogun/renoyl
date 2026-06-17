@@ -7,17 +7,13 @@ interface CheckoutButtonProps {
   productName: string;
 }
 
-export default function CheckoutButton({ priceId, productName }: CheckoutButtonProps) {
+export default function CheckoutButton({ priceId }: CheckoutButtonProps) {
   const stripe = useStripe();
 
   const handleCheckout = async () => {
-    if (!stripe) {
-      console.error("Stripe.js has not loaded yet.");
-      return;
-    }
+    if (!stripe) return;
 
     try {
-      // 1. Call your new API route to create a checkout session
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
       const response = await fetch(`${apiUrl}/stripe/checkout-session`, {
         method: 'POST',
@@ -31,17 +27,10 @@ export default function CheckoutButton({ priceId, productName }: CheckoutButtonP
       }
 
       const { sessionId } = await response.json();
-
-      // 2. Redirect to Stripe Checkout using the session ID
-      const { error } = await stripe.redirectToCheckout({
-        sessionId: sessionId,
-      });
-
-      if (error) {
-        console.error("Stripe checkout error:", error.message);
-      }
+      const { error } = await stripe.redirectToCheckout({ sessionId });
+      if (error) console.error('Stripe checkout error:', error.message);
     } catch (error) {
-      console.error("An error occurred during checkout:", error);
+      console.error('Checkout error:', error);
     }
   };
 
@@ -49,7 +38,8 @@ export default function CheckoutButton({ priceId, productName }: CheckoutButtonP
     <button
       onClick={handleCheckout}
       disabled={!stripe}
-      className="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 disabled:bg-gray-400"
+      aria-label="Buy now"
+      className="w-full border-2 border-[#2B5F3A] text-[#2B5F3A] hover:bg-[#2B5F3A] hover:text-white py-4 rounded-full font-medium transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
     >
       Buy Now
     </button>

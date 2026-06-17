@@ -6,22 +6,25 @@ const ProductShowcase = async () => {
 
   try {
     const apiProducts = await api.products.list();
-    products = apiProducts.map((p) => ({
-      id: p.id,
-      title: p.name,
-      price: Number(p.price),
-      imageUrl: p.images?.[0] || '/img/essential-oil.png',
-      slug: p.id,
-    }));
+    products = apiProducts
+      .filter((p) => p.isActive)
+      .slice(0, 4)
+      .map((p) => ({
+        id: p.id,
+        title: p.name,
+        price: Number(p.price),
+        imageUrl: p.images?.[0] || '/img/essential-oil.png',
+        slug: p.id,
+      }));
   } catch {
-    // API not reachable during build — render empty grid
+    // backend unreachable — render nothing
   }
 
   return (
     <ProductGrid
       products={products}
       title="Explore Our Exclusive Hair Oil Collections"
-      subtitle="Explore our variety of hair oil, formulated to combat hair loss, boost volume and nurture a healthy scalp. Begin your transformation today."
+      subtitle="Formulated to combat hair loss, boost volume and nurture a healthy scalp. Begin your transformation today."
     />
   );
 };
