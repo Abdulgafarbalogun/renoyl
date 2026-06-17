@@ -9,6 +9,8 @@ import * as bcrypt from 'bcrypt';
 
 config();
 
+const isProd = process.env.NODE_ENV === 'production';
+
 const AppDataSource = new DataSource({
   type: 'postgres',
   host: process.env.DB_HOST,
@@ -16,6 +18,7 @@ const AppDataSource = new DataSource({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
+  ssl: isProd ? { rejectUnauthorized: false } : false,
   entities: [User, Product, Order, OrderItem, NewsletterSubscriber],
   synchronize: true,
 });

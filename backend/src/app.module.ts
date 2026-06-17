@@ -30,17 +30,21 @@ import { NewsletterSubscriber } from './newsletter/newsletter-subscriber.entity'
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        type: 'postgres',
-        host: config.get<string>('DB_HOST'),
-        port: config.get<number>('DB_PORT'),
-        username: config.get<string>('DB_USERNAME'),
-        password: config.get<string>('DB_PASSWORD'),
-        database: config.get<string>('DB_NAME'),
-        entities: [User, Product, Order, OrderItem, NewsletterSubscriber],
-        synchronize: config.get<string>('NODE_ENV') !== 'production',
-        logging: config.get<string>('NODE_ENV') === 'development',
-      }),
+      useFactory: (config: ConfigService) => {
+        const isProd = config.get<string>('NODE_ENV') === 'production';
+        return {
+          type: 'postgres',
+          host: config.get<string>('DB_HOST'),
+          port: config.get<number>('DB_PORT'),
+          username: config.get<string>('DB_USERNAME'),
+          password: config.get<string>('DB_PASSWORD'),
+          database: config.get<string>('DB_NAME'),
+          ssl: isProd ? { rejectUnauthorized: false } : false,
+          entities: [User, Product, Order, OrderItem, NewsletterSubscriber],
+          synchronize: !isProd,
+          logging: !isProd,
+        };
+      },
     }),
 
     ThrottlerModule.forRoot([{ ttl: 60000, limit: 20 }]),
