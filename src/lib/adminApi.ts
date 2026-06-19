@@ -25,8 +25,6 @@ export interface AdminProduct {
   images: string[];
   stock: number;
   isActive: boolean;
-  stripePriceId: string;
-  stripeProductId: string;
   createdAt: string;
 }
 
@@ -70,8 +68,6 @@ export interface ProductFormData {
   ingredients?: string;
   stock: number;
   images?: string[];
-  stripePriceId?: string;
-  stripeProductId?: string;
   isActive?: boolean;
 }
 

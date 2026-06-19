@@ -9,8 +9,6 @@ export interface ApiProduct {
   images: string[];
   stock: number;
   isActive: boolean;
-  stripePriceId: string;
-  stripeProductId: string;
   createdAt: string;
 }
 

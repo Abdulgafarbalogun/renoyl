@@ -15,8 +15,6 @@ const EMPTY: ProductFormData = {
   ingredients: '',
   stock: 0,
   images: [],
-  stripePriceId: '',
-  stripeProductId: '',
   isActive: true,
 };
 
@@ -34,8 +32,6 @@ export default function ProductForm({ initial }: Props) {
           ingredients: initial.ingredients ?? '',
           stock: initial.stock,
           images: initial.images ?? [],
-          stripePriceId: initial.stripePriceId ?? '',
-          stripeProductId: initial.stripeProductId ?? '',
           isActive: initial.isActive,
         }
       : EMPTY,
@@ -148,26 +144,6 @@ export default function ProductForm({ initial }: Props) {
             rows={2}
             value={form.ingredients}
             onChange={(e) => set('ingredients', e.target.value)}
-            className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2B5F3A]"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Stripe Price ID</label>
-          <input
-            value={form.stripePriceId}
-            onChange={(e) => set('stripePriceId', e.target.value)}
-            placeholder="price_..."
-            className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2B5F3A]"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Stripe Product ID</label>
-          <input
-            value={form.stripeProductId}
-            onChange={(e) => set('stripeProductId', e.target.value)}
-            placeholder="prod_..."
             className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2B5F3A]"
           />
         </div>
