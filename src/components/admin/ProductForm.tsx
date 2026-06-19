@@ -40,6 +40,8 @@ export default function ProductForm({ initial }: Props) {
         }
       : EMPTY,
   );
+  const [priceInput, setPriceInput] = useState(initial ? String(initial.price) : '');
+  const [stockInput, setStockInput] = useState(initial ? String(initial.stock) : '');
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -100,14 +102,17 @@ export default function ProductForm({ initial }: Props) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Price (USD) *</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Price (£) *</label>
           <input
             required
             type="number"
-            min={0}
+            min={0.01}
             step={0.01}
-            value={form.price}
-            onChange={(e) => set('price', parseFloat(e.target.value) || 0)}
+            value={priceInput}
+            onChange={(e) => {
+              setPriceInput(e.target.value);
+              set('price', parseFloat(e.target.value) || 0);
+            }}
             className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2B5F3A]"
           />
         </div>
@@ -118,8 +123,11 @@ export default function ProductForm({ initial }: Props) {
             required
             type="number"
             min={0}
-            value={form.stock}
-            onChange={(e) => set('stock', parseInt(e.target.value) || 0)}
+            value={stockInput}
+            onChange={(e) => {
+              setStockInput(e.target.value);
+              set('stock', parseInt(e.target.value) || 0);
+            }}
             className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2B5F3A]"
           />
         </div>
