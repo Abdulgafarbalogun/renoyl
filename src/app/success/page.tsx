@@ -2,6 +2,7 @@
 import { Suspense, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { useZustandStore } from '@/store/zustandStore';
 
 interface OrderItem {
   productName: string;
@@ -22,8 +23,10 @@ function SuccessContent() {
   const sessionId = searchParams.get('session_id');
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
+  const clearCart = useZustandStore((state) => state.clearCart);
 
   useEffect(() => {
+    clearCart();
     if (!sessionId) { setLoading(false); return; }
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
     fetch(`${apiUrl}/orders/by-session?sessionId=${sessionId}`)
@@ -31,7 +34,7 @@ function SuccessContent() {
       .then((data) => setOrder(data))
       .catch(() => null)
       .finally(() => setLoading(false));
-  }, [sessionId]);
+  }, [sessionId, clearCart]);
 
   return (
     <div className="container mx-auto max-w-xl px-4 py-16 text-center">
