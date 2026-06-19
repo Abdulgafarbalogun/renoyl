@@ -1,47 +1,39 @@
 "use client";
 
-import { useStripe } from '@stripe/react-stripe-js';
+import { useState } from 'react';
+import { api } from '@/lib/api';
 
 interface CheckoutButtonProps {
-  priceId: string;
-  productName: string;
+  name: string;
+  price: number;
 }
 
-export default function CheckoutButton({ priceId }: CheckoutButtonProps) {
-  const stripe = useStripe();
+export default function CheckoutButton({ name, price }: CheckoutButtonProps) {
+  const [loading, setLoading] = useState(false);
 
   const handleCheckout = async () => {
-    if (!stripe) return;
-
+    setLoading(true);
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
-      const response = await fetch(`${apiUrl}/stripe/checkout-session`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ priceId, origin: window.location.origin }),
+      const { url } = await api.stripe.createCheckoutSession({
+        items: [{ name, price, quantity: 1 }],
+        origin: window.location.origin,
       });
-
-      if (!response.ok) {
-        const { error } = await response.json();
-        throw new Error(error || 'Failed to create checkout session.');
-      }
-
-      const { sessionId } = await response.json();
-      const { error } = await stripe.redirectToCheckout({ sessionId });
-      if (error) console.error('Stripe checkout error:', error.message);
+      if (url) window.location.href = url;
     } catch (error) {
       console.error('Checkout error:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <button
       onClick={handleCheckout}
-      disabled={!stripe}
+      disabled={loading}
       aria-label="Buy now"
       className="w-full border-2 border-[#2B5F3A] text-[#2B5F3A] hover:bg-[#2B5F3A] hover:text-white py-4 rounded-full font-medium transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
     >
-      Buy Now
+      {loading ? 'Redirecting…' : 'Buy Now'}
     </button>
   );
 }

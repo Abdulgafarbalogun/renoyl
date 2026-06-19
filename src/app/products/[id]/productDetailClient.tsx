@@ -11,7 +11,6 @@ interface ClientProduct {
   description: string;
   ingredients: string;
   image: string;
-  priceId: string;
 }
 
 const Stars = () => (
@@ -88,7 +87,7 @@ export default function ProductDetailClient({ product }: { product: ClientProduc
         >
           Add to Cart
         </button>
-        <CheckoutButton priceId={product.priceId} productName={product.name} />
+        <CheckoutButton name={product.name} price={product.price} />
       </div>
 
       {/* Trust badges */}
