@@ -29,10 +29,6 @@ export class CreateProductDto {
   stock?: number;
 
   @IsOptional()
-  @IsString()
-  stripePriceId?: string;
-
-  @IsOptional()
-  @IsString()
-  stripeProductId?: string;
+  @IsBoolean()
+  isActive?: boolean;
 }
