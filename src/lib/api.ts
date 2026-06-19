@@ -47,8 +47,11 @@ export const api = {
       apiFetch<ApiProduct>('/auth/me', { headers: { Authorization: `Bearer ${token}` } }),
   },
   stripe: {
-    createCheckoutSession: (body: { priceId: string; origin: string }) =>
-      apiFetch<{ sessionId: string }>('/stripe/checkout-session', {
+    createCheckoutSession: (body: {
+      items: { name: string; price: number; quantity: number; imageUrl?: string }[];
+      origin: string;
+    }) =>
+      apiFetch<{ sessionId: string; url: string }>('/stripe/checkout-session', {
         method: 'POST',
         body: JSON.stringify(body),
       }),

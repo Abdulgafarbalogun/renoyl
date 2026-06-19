@@ -9,7 +9,7 @@ export class StripeController {
 
   @Post('checkout-session')
   createCheckoutSession(@Body() dto: CreateCheckoutSessionDto) {
-    return this.stripeService.createCheckoutSession(dto.priceId, dto.origin);
+    return this.stripeService.createCheckoutSession(dto.items, dto.origin);
   }
 
   @Post('webhook')

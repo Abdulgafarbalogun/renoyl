@@ -20,19 +20,31 @@ export class StripeService {
     this.stripe = new Stripe(this.config.get<string>('STRIPE_SECRET_KEY') as string);
   }
 
-  async createCheckoutSession(priceId: string, origin: string) {
+  async createCheckoutSession(items: { name: string; price: number; quantity: number; imageUrl?: string }[], origin: string) {
+    const lineItems = items.map((item) => ({
+      price_data: {
+        currency: 'gbp',
+        product_data: {
+          name: item.name,
+          ...(item.imageUrl?.startsWith('http') ? { images: [item.imageUrl] } : {}),
+        },
+        unit_amount: Math.round(item.price * 100),
+      },
+      quantity: item.quantity,
+    }));
+
     const session = await this.stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      line_items: [{ price: priceId, quantity: 1 }],
+      line_items: lineItems,
       mode: 'payment',
       success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/cancel`,
       customer_creation: 'always',
       shipping_address_collection: {
-        allowed_countries: ['US', 'GB', 'CA', 'AU', 'NG', 'ZA', 'GH'],
+        allowed_countries: ['US', 'GB', 'CA', 'AU', 'IE', 'NG', 'ZA', 'GH'],
       },
     });
-    return { sessionId: session.id };
+    return { sessionId: session.id, url: session.url };
   }
 
   async handleWebhook(rawBody: Buffer, signature: string) {
