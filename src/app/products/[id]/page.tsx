@@ -56,17 +56,17 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
       <div className="container mx-auto px-6 lg:px-12 py-10">
 
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-sm text-gray-400 mb-12">
+        <nav className="flex items-center gap-2 text-sm text-gray-400 mb-6 md:mb-12">
           <Link href="/" className="hover:text-[#2B5F3A] transition-colors">Home</Link>
           <span>/</span>
           <Link href="/shop" className="hover:text-[#2B5F3A] transition-colors">Shop</Link>
           <span>/</span>
-          <span className="text-gray-700">{product.name}</span>
+          <span className="text-gray-700 truncate max-w-[140px] sm:max-w-none">{product.name}</span>
         </nav>
 
         {/* Product */}
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 mb-20">
-          <div className="bg-[#EDE4E1] rounded-3xl p-10 flex items-center justify-center aspect-square">
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-20 mb-10 md:mb-20">
+          <div className="bg-[#EDE4E1] rounded-3xl p-6 md:p-10 flex items-center justify-center aspect-square">
             <Image
               src={product.images?.[0] || '/img/essential-oil.png'}
               alt={product.name}
@@ -80,11 +80,11 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
 
         {/* Ingredients */}
         {product.ingredients && (
-          <div className="bg-white rounded-3xl px-12 py-14 mb-20 text-center">
+          <div className="bg-white rounded-3xl px-6 py-8 md:px-12 md:py-14 mb-10 md:mb-20 text-center">
             <span className="block text-[#2B5F3A] text-xs font-medium tracking-widest uppercase mb-4">
               Key Ingredients
             </span>
-            <h2 className="text-3xl font-light text-gray-900 mb-6">What&apos;s Inside</h2>
+            <h2 className="text-2xl md:text-3xl font-light text-gray-900 mb-4 md:mb-6">What&apos;s Inside</h2>
             <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">{product.ingredients}</p>
           </div>
         )}
@@ -92,16 +92,16 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         {/* Related products */}
         {related.length > 0 && (
           <div>
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-12">
               <span className="block text-[#2B5F3A] text-xs font-medium tracking-widest uppercase mb-4">
                 You May Also Like
               </span>
-              <h2 className="text-3xl font-light text-gray-900">Related Products</h2>
+              <h2 className="text-2xl md:text-3xl font-light text-gray-900">Related Products</h2>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
               {related.map((p) => (
                 <Link href={`/products/${p.id}`} key={p.id} className="group">
-                  <div className="bg-[#EDE4E1] rounded-2xl p-6 mb-4 aspect-square flex items-center justify-center overflow-hidden">
+                  <div className="bg-[#EDE4E1] rounded-2xl p-4 md:p-6 mb-3 md:mb-4 aspect-square flex items-center justify-center overflow-hidden">
                     <Image
                       src={p.images?.[0] || '/img/essential-oil.png'}
                       alt={p.name}

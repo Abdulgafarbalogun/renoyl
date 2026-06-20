@@ -39,19 +39,19 @@ export default function ShopContent() {
     <div className="min-h-screen bg-[#F9F7F2]">
 
       {/* Page header */}
-      <div className="bg-white border-b border-gray-100 py-14">
+      <div className="bg-white border-b border-gray-100 py-8 md:py-14">
         <div className="container mx-auto px-6 lg:px-12">
           <span className="block text-[#2B5F3A] text-xs font-medium tracking-widest uppercase mb-3">
             Collection
           </span>
-          <h1 className="text-4xl lg:text-5xl font-light text-gray-900">All Products</h1>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900">All Products</h1>
         </div>
       </div>
 
-      <div className="container mx-auto px-6 lg:px-12 py-12">
+      <div className="container mx-auto px-6 lg:px-12 py-8 md:py-12">
 
         {/* Filter bar */}
-        <div className="flex flex-col sm:flex-row gap-3 mb-12">
+        <div className="flex flex-col sm:flex-row gap-3 mb-8 md:mb-12">
           <div className="relative flex-1 max-w-sm">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
             <input
@@ -127,7 +127,7 @@ export default function ShopContent() {
                     )}
                     <p className="font-semibold text-gray-900 mb-3">£{Number(product.price).toFixed(2)}</p>
 
-                    <div className="flex gap-2">
+                    <div className="flex flex-col min-[400px]:flex-row gap-1.5">
                       <Link href={`/products/${product.id}`} className="flex-1">
                         <span className="block text-center border border-gray-200 hover:border-[#2B5F3A] hover:text-[#2B5F3A] text-gray-600 text-xs font-medium py-2.5 rounded-full transition-all duration-200">
                           View

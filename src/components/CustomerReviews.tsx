@@ -31,14 +31,14 @@ const Stars = () => (
 
 const CustomerReviews = () => {
   return (
-    <section className="py-24 bg-[#F9F7F2]">
+    <section className="py-12 md:py-24 bg-[#F9F7F2]">
       <div className="container mx-auto px-6 lg:px-12">
 
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-16">
           <span className="inline-block text-[#2B5F3A] text-xs font-medium tracking-widest uppercase mb-4">
             Testimonials
           </span>
-          <h2 className="text-4xl lg:text-5xl font-light text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-4">
             Our Customers Love Renoyl
           </h2>
           <p className="text-gray-500 max-w-xl mx-auto leading-relaxed">

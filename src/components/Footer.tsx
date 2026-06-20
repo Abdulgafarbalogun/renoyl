@@ -59,8 +59,8 @@ const Footer = () => {
     <footer className="bg-[#1B3A2D] text-white">
 
       {/* Main body */}
-      <div className="container mx-auto px-6 lg:px-12 pt-16 pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div className="container mx-auto px-6 lg:px-12 pt-10 pb-8 md:pt-16 md:pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
 
           {/* Brand */}
           <div className="lg:col-span-4 space-y-6">

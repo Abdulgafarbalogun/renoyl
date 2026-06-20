@@ -30,30 +30,30 @@ export default function AboutPage() {
     <div className="bg-[#F9F7F2] min-h-screen">
 
       {/* Hero */}
-      <div className="bg-white py-24">
+      <div className="bg-white py-12 md:py-24">
         <div className="container mx-auto px-6 lg:px-12 text-center">
-          <span className="inline-block text-[#2B5F3A] text-xs font-medium tracking-widest uppercase mb-6">
+          <span className="inline-block text-[#2B5F3A] text-xs font-medium tracking-widest uppercase mb-4 md:mb-6">
             Our Story
           </span>
-          <h1 className="text-5xl lg:text-7xl font-light text-gray-900 mb-8 max-w-3xl mx-auto leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-light text-gray-900 mb-5 md:mb-8 max-w-3xl mx-auto leading-tight">
             Premium Oils,{' '}
             <em className="text-[#2B5F3A]">Naturally</em>{' '}
             Made
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
             We believe your hair deserves the best nature has to offer. Renoyl was born from a passion for natural, effective hair care that respects both you and the environment.
           </p>
         </div>
       </div>
 
       {/* Values */}
-      <div className="py-24">
+      <div className="py-12 md:py-24">
         <div className="container mx-auto px-6 lg:px-12">
 
-          <div className="grid md:grid-cols-3 gap-6 mb-24">
+          <div className="grid md:grid-cols-3 gap-4 md:gap-6 mb-12 md:mb-24">
             {values.map(({ title, description }) => (
-              <div key={title} className="bg-white rounded-2xl p-8">
-                <div className="w-11 h-11 rounded-xl bg-[#2B5F3A]/10 flex items-center justify-center mb-6">
+              <div key={title} className="bg-white rounded-2xl p-6 md:p-8">
+                <div className="w-11 h-11 rounded-xl bg-[#2B5F3A]/10 flex items-center justify-center mb-5 md:mb-6">
                   <div className="w-5 h-5 rounded-full bg-[#2B5F3A]" />
                 </div>
                 <h3 className="text-xl font-medium text-gray-900 mb-3">{title}</h3>
@@ -63,8 +63,8 @@ export default function AboutPage() {
           </div>
 
           {/* Mission section */}
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div className="bg-[#EDE4E1] rounded-3xl aspect-[4/5] flex items-center justify-center p-16">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
+            <div className="bg-[#EDE4E1] rounded-3xl aspect-[4/3] md:aspect-[4/5] flex items-center justify-center p-10 md:p-16">
               <Image
                 src="/img/logo.png"
                 alt="Renoyl Logo"
@@ -78,7 +78,7 @@ export default function AboutPage() {
               <span className="block text-[#2B5F3A] text-xs font-medium tracking-widest uppercase">
                 Our Mission
               </span>
-              <h2 className="text-4xl font-light text-gray-900 leading-tight">
+              <h2 className="text-2xl md:text-4xl font-light text-gray-900 leading-tight">
                 Empowering Through Natural Beauty
               </h2>
               <p className="text-gray-600 leading-relaxed">

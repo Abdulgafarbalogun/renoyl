@@ -144,7 +144,7 @@ const Header = () => {
             </button>
 
             {cartOpen && (
-              <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg z-50 overflow-hidden">
+              <div className="absolute right-0 mt-2 w-[min(320px,calc(100vw-1rem))] bg-white rounded-lg shadow-lg z-50 overflow-hidden">
                 <div className="p-4 border-b">
                   <h3 className="font-medium">Cart</h3>
                 </div>

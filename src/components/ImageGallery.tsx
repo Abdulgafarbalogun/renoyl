@@ -2,15 +2,15 @@ import Link from 'next/link';
 
 const ImageGallery = () => {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-12 md:py-24 bg-white">
       <div className="container mx-auto px-6 lg:px-12">
 
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 md:mb-12 gap-4">
           <div>
-            <span className="inline-block text-[#2B5F3A] text-xs font-medium tracking-widest uppercase mb-4">
+            <span className="inline-block text-[#2B5F3A] text-xs font-medium tracking-widest uppercase mb-3">
               The Renoyl Lifestyle
             </span>
-            <h2 className="text-4xl lg:text-5xl font-light text-gray-900">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900">
               Naturally Beautiful
             </h2>
           </div>
