@@ -1,6 +1,5 @@
 "use client";
 
-import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useZustandStore } from '../store/zustandStore';
@@ -54,8 +53,8 @@ const ProductGrid = ({ products, title, subtitle }: ProductGridProps) => {
                   src={product.imageUrl}
                   alt={product.title}
                   fill
-                  style={{ objectFit: 'contain' }}
-                  className="p-10 transition-transform duration-500 group-hover:scale-105"
+                  style={{ objectFit: 'cover' }}
+                  className="transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
 

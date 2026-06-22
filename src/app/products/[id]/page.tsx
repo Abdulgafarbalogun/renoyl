@@ -66,13 +66,13 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
 
         {/* Product */}
         <div className="grid md:grid-cols-2 gap-8 lg:gap-20 mb-10 md:mb-20">
-          <div className="bg-[#EDE4E1] rounded-3xl p-6 md:p-10 flex items-center justify-center aspect-square">
+          <div className="relative bg-[#EDE4E1] rounded-3xl overflow-hidden aspect-square">
             <Image
               src={product.images?.[0] || '/img/essential-oil.png'}
               alt={product.name}
-              width={500}
-              height={500}
-              className="object-contain max-h-full max-w-full transition-transform duration-700 hover:scale-105"
+              fill
+              style={{ objectFit: 'cover' }}
+              className="transition-transform duration-700 hover:scale-105"
             />
           </div>
           <ProductDetailClient product={clientProduct} />
@@ -101,13 +101,13 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
               {related.map((p) => (
                 <Link href={`/products/${p.id}`} key={p.id} className="group">
-                  <div className="bg-[#EDE4E1] rounded-2xl p-4 md:p-6 mb-3 md:mb-4 aspect-square flex items-center justify-center overflow-hidden">
+                  <div className="relative bg-[#EDE4E1] rounded-2xl mb-3 md:mb-4 aspect-square overflow-hidden">
                     <Image
                       src={p.images?.[0] || '/img/essential-oil.png'}
                       alt={p.name}
-                      width={150}
-                      height={150}
-                      className="object-contain transition-transform duration-500 group-hover:scale-110"
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      className="transition-transform duration-500 group-hover:scale-110"
                     />
                   </div>
                   <h3 className="font-medium text-gray-900 text-sm group-hover:text-[#2B5F3A] transition-colors">

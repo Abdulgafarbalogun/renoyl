@@ -115,8 +115,8 @@ export default function ShopContent() {
                       src={imageUrl}
                       alt={product.name}
                       fill
-                      style={{ objectFit: 'contain' }}
-                      className="p-6 transition-transform duration-500 group-hover:scale-105"
+                      style={{ objectFit: 'cover' }}
+                      className="transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
 
