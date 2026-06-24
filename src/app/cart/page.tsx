@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Minus, Plus, ShoppingCart } from 'lucide-react';
 import { useZustandStore } from '@/store/zustandStore';
+import { useAuthStore } from '@/store/authStore';
 import { api } from '@/lib/api';
 import PageBanner from '@/components/PageBanner';
 
@@ -11,6 +12,7 @@ export default function CartPage() {
   const cart = useZustandStore((s) => s.cart);
   const removeItem = useZustandStore((s) => s.removeItem);
   const updateItemQuantity = useZustandStore((s) => s.updateItemQuantity);
+  const { token } = useAuthStore();
   const [coupon, setCoupon] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -22,15 +24,18 @@ export default function CartPage() {
     setLoading(true);
     setError('');
     try {
-      const { url } = await api.stripe.createCheckoutSession({
-        items: cart.map((i) => ({
-          name: i.name,
-          price: i.price,
-          quantity: i.quantity,
-          imageUrl: i.imageUrl,
-        })),
-        origin: window.location.origin,
-      });
+      const { url } = await api.stripe.createCheckoutSession(
+        {
+          items: cart.map((i) => ({
+            name: i.name,
+            price: i.price,
+            quantity: i.quantity,
+            imageUrl: i.imageUrl,
+          })),
+          origin: window.location.origin,
+        },
+        token ?? undefined,
+      );
       if (url) window.location.href = url;
       else setError('Could not start checkout. Please try again.');
     } catch {
