@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Search } from 'lucide-react';
 import { useZustandStore } from '@/store/zustandStore';
 import { api, ApiProduct } from '@/lib/api';
+import PageBanner from '@/components/PageBanner';
 
 type SortKey = 'default' | 'price-asc' | 'price-desc';
 
@@ -38,15 +39,10 @@ export default function ShopContent() {
   return (
     <div className="min-h-screen bg-[#F9F7F2]">
 
-      {/* Page header */}
-      <div className="bg-white border-b border-gray-100 py-8 md:py-14">
-        <div className="container mx-auto px-6 lg:px-12">
-          <span className="block text-[#2B5F3A] text-xs font-medium tracking-widest uppercase mb-3">
-            Collection
-          </span>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900">All Products</h1>
-        </div>
-      </div>
+      <PageBanner
+        title="Shop"
+        breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Shop' }]}
+      />
 
       <div className="container mx-auto px-6 lg:px-12 py-8 md:py-12">
 

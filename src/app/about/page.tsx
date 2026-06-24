@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import PageBanner from '@/components/PageBanner';
 
 export const metadata: Metadata = {
   title: 'About — Renoyl',
@@ -29,22 +30,7 @@ export default function AboutPage() {
   return (
     <div className="bg-[#F9F7F2] min-h-screen">
 
-      {/* Hero */}
-      <div className="bg-white py-12 md:py-24">
-        <div className="container mx-auto px-6 lg:px-12 text-center">
-          <span className="inline-block text-[#2B5F3A] text-xs font-medium tracking-widest uppercase mb-4 md:mb-6">
-            Our Story
-          </span>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-light text-gray-900 mb-5 md:mb-8 max-w-3xl mx-auto leading-tight">
-            Premium Oils,{' '}
-            <em className="text-[#2B5F3A]">Naturally</em>{' '}
-            Made
-          </h1>
-          <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            We believe your hair deserves the best nature has to offer. Renoyl was born from a passion for natural, effective hair care that respects both you and the environment.
-          </p>
-        </div>
-      </div>
+      <PageBanner title="About" breadcrumb={[{ label: 'Home', href: '/' }, { label: 'About' }]} />
 
       {/* Values */}
       <div className="py-12 md:py-24">
