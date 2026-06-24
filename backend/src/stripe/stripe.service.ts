@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import Stripe from 'stripe';
 import { Order, OrderStatus } from '../orders/order.entity';
 import { OrderItem } from '../orders/order-item.entity';
+import { User } from '../users/user.entity';
 import { EmailService } from '../email/email.service';
 
 @Injectable()
@@ -15,6 +16,7 @@ export class StripeService {
     private config: ConfigService,
     @InjectRepository(Order) private ordersRepo: Repository<Order>,
     @InjectRepository(OrderItem) private orderItemsRepo: Repository<OrderItem>,
+    @InjectRepository(User) private usersRepo: Repository<User>,
     private emailService: EmailService,
   ) {
     this.stripe = new Stripe(this.config.get<string>('STRIPE_SECRET_KEY') as string);
@@ -77,14 +79,20 @@ export class StripeService {
       expand: ['data.price.product'],
     });
 
+    const customerEmail = session.customer_details?.email ?? '';
+    const linkedUser = customerEmail
+      ? await this.usersRepo.findOne({ where: { email: customerEmail } })
+      : null;
+
     const order = this.ordersRepo.create({
       stripeSessionId: session.id,
       stripePaymentIntent: session.payment_intent as string,
-      customerEmail: session.customer_details?.email ?? '',
+      customerEmail,
       customerName: session.customer_details?.name ?? '',
       shippingAddress: session.shipping_details?.address,
       status: OrderStatus.PAID,
       totalAmount: (session.amount_total ?? 0) / 100,
+      ...(linkedUser ? { userId: linkedUser.id } : {}),
     });
     await this.ordersRepo.save(order);
 

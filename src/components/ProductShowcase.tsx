@@ -24,7 +24,7 @@ const ProductShowcase = async () => {
     <ProductGrid
       products={products}
       title="Explore Our Exclusive Hair Oil Collections"
-      subtitle="Formulated to combat hair loss, boost volume and nurture a healthy scalp. Begin your transformation today."
+      subtitle="Explore our variety of hair oil, formulated to combat hair loss, boost volume and nurture a healthy scalp. Begin your transformation today."
     />
   );
 };

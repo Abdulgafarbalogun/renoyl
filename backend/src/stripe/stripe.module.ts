@@ -4,10 +4,11 @@ import { StripeService } from './stripe.service';
 import { StripeController } from './stripe.controller';
 import { Order } from '../orders/order.entity';
 import { OrderItem } from '../orders/order-item.entity';
+import { User } from '../users/user.entity';
 import { EmailModule } from '../email/email.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Order, OrderItem]), EmailModule],
+  imports: [TypeOrmModule.forFeature([Order, OrderItem, User]), EmailModule],
   controllers: [StripeController],
   providers: [StripeService],
   exports: [StripeService],
