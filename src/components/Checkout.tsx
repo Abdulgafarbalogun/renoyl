@@ -3,11 +3,13 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useZustandStore } from '../store/zustandStore';
+import { useAuthStore } from '../store/authStore';
 import { api } from '@/lib/api';
 import PageBanner from '@/components/PageBanner';
 
 const Checkout = () => {
   const cart = useZustandStore((state) => state.cart);
+  const { token } = useAuthStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -21,15 +23,18 @@ const Checkout = () => {
     setLoading(true);
     setError(null);
     try {
-      const { url } = await api.stripe.createCheckoutSession({
-        items: cart.map((item) => ({
-          name: item.name,
-          price: item.price,
-          quantity: item.quantity,
-          imageUrl: item.imageUrl,
-        })),
-        origin: window.location.origin,
-      });
+      const { url } = await api.stripe.createCheckoutSession(
+        {
+          items: cart.map((item) => ({
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+            imageUrl: item.imageUrl,
+          })),
+          origin: window.location.origin,
+        },
+        token ?? undefined,
+      );
       if (url) {
         window.location.href = url;
       } else {

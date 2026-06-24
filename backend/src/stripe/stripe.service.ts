@@ -22,7 +22,11 @@ export class StripeService {
     this.stripe = new Stripe(this.config.get<string>('STRIPE_SECRET_KEY') as string);
   }
 
-  async createCheckoutSession(items: { name: string; price: number; quantity: number; imageUrl?: string }[], origin: string) {
+  async createCheckoutSession(
+    items: { name: string; price: number; quantity: number; imageUrl?: string }[],
+    origin: string,
+    userId?: string,
+  ) {
     const lineItems = items.map((item) => ({
       price_data: {
         currency: 'gbp',
@@ -45,6 +49,7 @@ export class StripeService {
       shipping_address_collection: {
         allowed_countries: ['US', 'GB', 'CA', 'AU', 'IE', 'NG', 'ZA', 'GH'],
       },
+      ...(userId ? { metadata: { userId } } : {}),
     });
     return { sessionId: session.id, url: session.url };
   }
@@ -80,9 +85,15 @@ export class StripeService {
     });
 
     const customerEmail = session.customer_details?.email ?? '';
-    const linkedUser = customerEmail
-      ? await this.usersRepo.findOne({ where: { email: customerEmail } })
+    const metaUserId = session.metadata?.userId as string | undefined;
+
+    let linkedUser = metaUserId
+      ? await this.usersRepo.findOne({ where: { id: metaUserId } })
       : null;
+
+    if (!linkedUser && customerEmail) {
+      linkedUser = await this.usersRepo.findOne({ where: { email: customerEmail } });
+    }
 
     const order = this.ordersRepo.create({
       stripeSessionId: session.id,
