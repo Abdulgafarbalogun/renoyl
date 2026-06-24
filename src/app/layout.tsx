@@ -7,7 +7,7 @@ import SiteShell from '@/components/SiteShell';
 const playfair = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-display',
-  weight: ['400', '500', '600'],
+  weight: ['400', '500', '600', '700', '800'],
   style: ['normal', 'italic'],
   display: 'swap',
 });
